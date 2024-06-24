@@ -133,6 +133,8 @@ function MultiSelect(id, custom) {
             }
         }
 
+        hideAllOptions();
+
         if (buttonClicked) {
             optionsMultiSelector.style.border = "1px solid black";
             optionsMultiSelector.style.borderTop = "0px solid";
@@ -270,5 +272,23 @@ function MultiSelect(id, custom) {
         custom.onChange(arrItems);
     }
 
+    const hideAllOptions = ()=>{
+        document.querySelectorAll(".container--options").forEach(op=>{
+            op.style.borderColor = "transparent";
+            op.innerHTML=``;
+        })
+    }
+
+    window.addEventListener("click",(e)=>{
+        if(e.target.localName != "svg" && e.target.localName != "input" && e.target.type != "checkbox"){
+            hideAllOptions();
+            buttonClick.forEach(btn=>{
+                btn.key = false;
+            })
+        }
+    })
+
     init(id, custom);
+
+
 }
