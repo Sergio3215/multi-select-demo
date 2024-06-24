@@ -43,9 +43,9 @@ function MultiSelect(id, custom) {
         selectElements.parentNode.innerHTML += `
         <div id="${myId}" style="margin-bottom:5px;min-width: 418px;max-width: 600px;">
             <div class="container--multiselect" style="display:flex; flex-direction:row;justify-content: space-between;">
-                <div class="items--multiselect">
-                    <input type="text" id="text--default" readonly style="font-size:18px; margin-top:5px;margin-left:5px;border-color:transparent;cursor:default;"/>
-                    <div style="display: flex;flex-direction: row;flex-wrap: wrap;padding:5px"></div>
+                <div class="items--multiselect" style="display:flex; flex-direction:column; justify-content:center;align-content:center">
+                    <input type="text" id="text--default" readonly style="font-size:18px; margin-top:6px;margin-left:5px;border-color:transparent;cursor:default;textalign:center;background-color:transparent"/>
+                    <div style="display: flex;flex-direction: row;flex-wrap: wrap;padding:1.5px"></div>
                 </div>
                 <div id="button--action--option" style="cursor:pointer;margin-right:5px;padding:5px 0px">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px"  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -185,7 +185,8 @@ function MultiSelect(id, custom) {
 
         collectId.forEach(el => {
             document.querySelector(`#contain--all--multiselect--${el} div div #text--default`).addEventListener("focus", (e) => {
-                e.target.style.outlineColor = "transparent";
+                e.target.style.outline = "none";
+                e.target.style.background = "transparent";
             });
         });
     }
@@ -256,7 +257,7 @@ function MultiSelect(id, custom) {
 
         arrText.forEach(el => {
             if (el.id == optionsId) {
-                document.querySelector(`#${optionsId} .container--multiselect .items--multiselect div`).innerHTML += `<label style="margin-right:5px; font-size:12px;border:1px solid #2c8fff; color:white; background-color:#2c8fff;border-radius:3.5px;padding:1px;margin-left:3px;margin-top:2px;">${el.text}</label>`;
+                document.querySelector(`#${optionsId} .container--multiselect .items--multiselect div`).innerHTML += `<label style="margin-right:5px; font-size:12px;border:1px solid #2c8fff; color:white; background-color:#2c8fff;border-radius:3.5px;padding:2px;margin-left:5px;margin-top:2px;margin-bottom:2px;">${el.text}</label>`;
             }
         })
     }
