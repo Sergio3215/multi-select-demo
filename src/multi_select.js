@@ -41,14 +41,14 @@ function MultiSelect(id, custom) {
         // id = `contain--all--multiselect--${idElement}`
         let idButtonOpen = `button--multiselect--${idElement}`
         selectElements.parentNode.innerHTML += `
-        <div id="${myId}" style="margin-bottom:5px;">
+        <div id="${myId}" style="margin-bottom:5px;min-width: 418px;max-width: 600px;">
             <div class="container--multiselect" style="display:flex; flex-direction:row;justify-content: space-between;">
                 <div class="items--multiselect">
                     <input type="text" id="text--default" readonly style="font-size:18px; margin-top:5px;margin-left:5px;border-color:transparent;cursor:default;"/>
-                    <div></div>
+                    <div style="display: flex;flex-direction: row;flex-wrap: wrap;padding:5px"></div>
                 </div>
-                <div id="button--action--option" style="cursor:pointer;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="70%"  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <div id="button--action--option" style="cursor:pointer;margin-right:5px;padding:5px 0px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px"  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="18 15 12 21 6 15"></polyline>
                     </svg>
                 </div>
@@ -72,9 +72,12 @@ function MultiSelect(id, custom) {
 
         //style Container MultiSelect
         let multiSelector = containerStyle.querySelector(".container--multiselect");
-        multiSelector.style.border = "1px solid black";
+        let bordercolor = custom.borderColor == undefined ? 'black' : custom.borderColor;
+
+        multiSelector.style.border = "1px solid " + bordercolor;
         multiSelector.style.width = "60%";
-        multiSelector.style.height = "35px";
+        // multiSelector.style.height = "35px";
+        multiSelector.style.borderRadius = custom.borderRadius;
 
 
         //style Container MultiSelect Options
@@ -168,7 +171,7 @@ function MultiSelect(id, custom) {
         checkboxOptions.forEach(el => {
             el.addEventListener("change", (e) => {
                 checkHandler(e);
-                OnChange(e.id);
+                OnChange(e.target.id);
             })
         })
     }
@@ -256,9 +259,9 @@ function MultiSelect(id, custom) {
         })
     }
 
-    const OnChange = (id)=>{
+    const OnChange = (id) => {
         let arrItems = [];
-        arrayOptions.forEach(item=>{
+        arrayOptions.filter(e => e.id == id).forEach(item => {
             arrItems.push({
                 value: item.value,
                 text: item.text
@@ -268,5 +271,4 @@ function MultiSelect(id, custom) {
     }
 
     init(id, custom);
-    console.log(id, custom);
 }
